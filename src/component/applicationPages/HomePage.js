@@ -1,13 +1,58 @@
-import React from 'react'
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const HomePage = () => {
+  const [userList, setUserList] = useState([]);
+
+  useEffect(() => {
+    loadusers();
+  }, []);
+
+  const loadusers = async () => {
+    const result = await axios.get("http://localhost:3006/userdata");
+    console.log("result-->", result.data);
+    setUserList(result.data);
+  };
+
   return (
     <div className="container">
       <div className="py-4">
-        <h1>home</h1>
+        <table className="table border shadow">
+          <thead>
+            <tr>
+              <th scope="col">Sl.No.</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Contact</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {userList.map((uData, uIndex) => (
+              <tr key={uData.id}>
+                <th scope="row">{uIndex + 1}</th>
+                <td>{uData.name}</td>
+                <td>{uData.email}</td>
+                <td>{uData.phone}</td>
+                <td>
+                  <div
+                    className="btn-group border shadow"
+                    role="group"
+                    aria-label="Basic mixed styles example"
+                  >
+                    <Link to="/view" className="btn btn-outline-primary">View</Link>
+                    <Link to="/edit" className="btn btn-outline-primary">Edit</Link>
+                    <button type="button" className="btn btn-danger">Delete</button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;

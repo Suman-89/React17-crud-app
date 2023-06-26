@@ -1,9 +1,10 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const NavPage = () => {
   return (
-    <div className="container my-2">
+    <div className="container my-1">
       <nav className="navbar navbar-expand-lg navbar-dark bg-secondary">
         <div className="container-fluid">
           <a className="navbar-brand" href="/">
@@ -20,7 +21,7 @@ const NavPage = () => {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" >
+          <div className="collapse navbar-collapse">
             <div className="navbar-nav">
               <NavLink className="nav-link" exact to="/">
                 Home
@@ -33,6 +34,10 @@ const NavPage = () => {
               </NavLink>
             </div>
           </div>
+
+          <Link exact to="/addnew" className="btn btn-outline-light">
+            Add New (+)
+          </Link>
         </div>
       </nav>
     </div>

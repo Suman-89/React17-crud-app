@@ -1,0 +1,11 @@
+.not-found {
+  position: fixed;
+  top: 0%;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: bisque;
+  color: rgb(242, 2, 2);
+}
