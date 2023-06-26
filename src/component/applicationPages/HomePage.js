@@ -23,10 +23,8 @@ const HomePage = () => {
       .then((res) => {
         if (res.status === 200) {
           // if(window.warning("Do you want to delete ?")){
-            // console.log('res-->',res);
+          // console.log('res-->',res);
           loadusers(res.data);
-          
-          
         }
       })
       .catch((err) => {
