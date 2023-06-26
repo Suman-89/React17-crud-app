@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const AddNewPage = () => {
   let history = useHistory();
@@ -44,6 +45,9 @@ const AddNewPage = () => {
   return (
     <div className="container my-3" style={{ width: "60%" }}>
       <div className="card border shadow">
+        <div className="text-center">
+          <h2>Add a User</h2>
+        </div>
         <div className="card-body">
           <form onSubmit={(e) => formSubmit(e)}>
             <div className="mb-3">
@@ -112,13 +116,9 @@ const AddNewPage = () => {
                 </button>
               </div>
               <div className="col-md-6">
-                <button
-                  type="button"
-                  href="/"
-                  className="btn btn-secondary border shadow"
-                >
+                <Link to="/" className="btn btn-secondary border shadow">
                   Back to home
-                </button>
+                </Link>
               </div>
             </div>
           </form>

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const HomePage = () => {
+  // const {eid} = useParams();
   const [userList, setUserList] = useState([]);
 
   useEffect(() => {
@@ -11,8 +12,26 @@ const HomePage = () => {
 
   const loadusers = async () => {
     const result = await axios.get("http://localhost:3006/userdata");
-    console.log("result-->", result.data);
-    setUserList(result.data);
+    // console.log("result-->", result.data);
+    setUserList(result.data.reverse());
+  };
+
+  const delUser = async (id) => {
+    // console.log('delid-->',id);
+    await axios
+      .delete(`http://localhost:3006/userdata/${id}`)
+      .then((res) => {
+        if (res.status === 200) {
+          // if(window.warning("Do you want to delete ?")){
+            // console.log('res-->',res);
+          loadusers(res.data);
+          
+          
+        }
+      })
+      .catch((err) => {
+        console.log("err-->", err);
+      });
   };
 
   return (
@@ -31,7 +50,7 @@ const HomePage = () => {
           <tbody>
             {userList.map((uData, uIndex) => (
               <tr key={uData.id}>
-                <th scope="row">{uIndex + 1}</th>
+                <th scope="row">{uIndex + 1}.</th>
                 <td>{uData.name}</td>
                 <td>{uData.email}</td>
                 <td>{uData.phone}</td>
@@ -41,9 +60,22 @@ const HomePage = () => {
                     role="group"
                     aria-label="Basic mixed styles example"
                   >
-                    <Link to="/view" className="btn btn-outline-primary">View</Link>
-                    <Link to="/edit" className="btn btn-outline-primary">Edit</Link>
-                    <button type="button" className="btn btn-danger">Delete</button>
+                    <Link to="/view" className="btn btn-outline-primary">
+                      View
+                    </Link>
+                    <Link
+                      to={`/edit/${uData.id}`}
+                      className="btn btn-outline-primary"
+                    >
+                      Edit
+                    </Link>
+                    <button
+                      type="button"
+                      className="btn btn-danger"
+                      onClick={() => delUser(uData.id)}
+                    >
+                      Delete
+                    </button>
                   </div>
                 </td>
               </tr>
