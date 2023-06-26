@@ -58,7 +58,7 @@ const HomePage = () => {
                     role="group"
                     aria-label="Basic mixed styles example"
                   >
-                    <Link to="/view" className="btn btn-outline-primary">
+                    <Link to={`/view/${uData.id}`} className="btn btn-outline-primary">
                       View
                     </Link>
                     <Link
