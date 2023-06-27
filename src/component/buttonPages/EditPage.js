@@ -10,14 +10,14 @@ const EditPage = () => {
   const { eid } = useParams();
   let history = useHistory();
   const [editUser, setEditUser] = useState({
-    newName: "",
-    newUserName: "",
-    newEmail: "",
-    newWebsite: "",
-    newPhone: "",
+    name: "",
+    username: "",
+    email: "",
+    website: "",
+    phone: "",
   });
 
-  const { newName, newUserName, newEmail, newWebsite, newPhone } = editUser;
+  const { name, username, email, website, phone } = editUser;
 
   const onInputChange = (e) => {
     // console.log("onInputChange-->", e.target.value);
@@ -30,15 +30,9 @@ const EditPage = () => {
 
   const formSubmit = async (e) => {
     e.preventDefault();
-    const newFormData = {
-      name: editUser.newName,
-      username: editUser.newUserName,
-      email: editUser.newEmail,
-      website: editUser.newWebsite,
-      phone: editUser.newPhone,
-    };
+  
     await axios
-      .put(`http://localhost:3006/userdata/${eid}`, newFormData)
+      .put(`http://localhost:3006/userdata/${eid}`, editUser)
       .then((response) => {
         console.log("add_response-->", response);
         if (response.status === 201) {
@@ -51,15 +45,9 @@ const EditPage = () => {
   };
 
   const loadUser = async () => {
-    const newFormData = {
-      name: editUser.newName,
-      username: editUser.newUserName,
-      email: editUser.newEmail,
-      website: editUser.newWebsite,
-      phone: editUser.newPhone,
-    };
+    
     await axios
-      .get(`http://localhost:3006/userdata/${eid}`,newFormData)
+      .get(`http://localhost:3006/userdata/${eid}`,editUser)
       .then((res) => {
         console.log("res-->", res);
         setEditUser(res.data);
@@ -84,8 +72,8 @@ const EditPage = () => {
                   type="text"
                   className="form-control"
                   placeholder="Employee Name"
-                  name="newName"
-                  value={newName}
+                  name="name"
+                  value={name}
                   onChange={(e) => onInputChange(e)}
                 />
               </div>
@@ -95,8 +83,8 @@ const EditPage = () => {
                   type="text"
                   className="form-control"
                   placeholder="User Name"
-                  name="newUserName"
-                  value={newUserName}
+                  name="username"
+                  value={username}
                   onChange={(e) => onInputChange(e)}
                 />
               </div>
@@ -106,8 +94,8 @@ const EditPage = () => {
                   type="text"
                   className="form-control"
                   placeholder="Email"
-                  name="newEmail"
-                  value={newEmail}
+                  name="email"
+                  value={email}
                   onChange={(e) => onInputChange(e)}
                 />
               </div>
@@ -117,8 +105,8 @@ const EditPage = () => {
                   type="text"
                   className="form-control"
                   placeholder="Website"
-                  name="newWebsite"
-                  value={newWebsite}
+                  name="website"
+                  value={website}
                   onChange={(e) => onInputChange(e)}
                 />
               </div>
@@ -128,8 +116,8 @@ const EditPage = () => {
                   type="text"
                   className="form-control"
                   placeholder="Contact no."
-                  name="newPhone"
-                  value={newPhone}
+                  name="phone"
+                  value={phone}
                   onChange={(e) => onInputChange(e)}
                 />
               </div>
